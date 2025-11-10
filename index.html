@@ -4,9 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Frohe Weihnachten!</title>
-<link rel="stylesheet" href="style.css">
 <style>
-  /* Body & Hintergrund */
   body {
     font-family: system-ui, sans-serif;
     margin: 0;
@@ -18,7 +16,6 @@
     min-height: 100vh;
   }
 
-  /* Karte / Content */
   .card {
     max-width: 600px;
     margin: 80px auto;
@@ -28,15 +25,8 @@
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   }
 
-  h2 {
-    margin: 0 0 15px;
-    font-size: 2em;
-  }
-
-  p {
-    font-size: 1.1em;
-    margin-bottom: 20px;
-  }
+  h2 { margin: 0 0 15px; font-size: 2em; }
+  p { font-size: 1.1em; margin-bottom: 20px; }
 
   button {
     padding: 12px 24px;
@@ -47,22 +37,11 @@
     font-size: 1.1em;
     cursor: pointer;
   }
+  button:hover { background: #ff4d4d; }
 
-  button:hover {
-    background: #ff4d4d;
-  }
+  audio { width: 100%; margin-top: 20px; }
+  #error { margin-top: 15px; color: #ffb3b3; }
 
-  audio {
-    width: 100%;
-    margin-top: 20px;
-  }
-
-  #error {
-    margin-top: 15px;
-    color: #ffb3b3;
-  }
-
-  /* Schneeflocken */
   .snowflake {
     position: fixed;
     top: -10px;
@@ -73,7 +52,7 @@
     z-index: 9999;
     animation-name: fall;
     animation-timing-function: linear;
-    animation-iteration-count: 1;
+    animation-iteration-count: infinite;
   }
 
   @keyframes fall {
@@ -85,44 +64,30 @@
 <body>
 
   <div class="card">
-    <h2>Frohe Weihnachten, <span id="name">mein Freund</span> 🎄</h2>
+    <h2>Frohe Weihnachten, <span id="name">…</span> 🎄</h2>
     <p>Ich habe eine kleine Nachricht für dich vorbereitet.</p>
     <button id="playBtn">▶️ Gruß abspielen</button>
     <audio id="player" controls></audio>
     <div id="error"></div>
   </div>
 
-  <!-- Schneeflocken-Skript -->
+  <!-- Schneeflocken -->
   <script>
-    const maxInitialFlakes = 100; // zu Beginn erzeugt
-    const snowflakes = [];
-
-    function createSnowflake() {
-        const flake = document.createElement('div');
-        flake.className = 'snowflake';
-        flake.style.left = Math.random() * 100 + 'vw';
-        flake.style.fontSize = (Math.random() * 10 + 10) + 'px';
-        flake.style.opacity = Math.random();
-        const duration = Math.random() * 10 + 5; // 5-15s
-        flake.style.animationDuration = duration + 's';
-        flake.innerHTML = '❄';
-        document.body.appendChild(flake);
-        snowflakes.push(flake);
-
-        // Entfernt Schneeflocke nach Ende der Animation
-        setTimeout(() => {
-            flake.remove();
-            snowflakes.splice(snowflakes.indexOf(flake),1);
-            // Neue Schneeflocke nach zufälliger Verzögerung erzeugen
-            setTimeout(createSnowflake, Math.random() * 1000);
-        }, duration * 1000);
-    }
-
-    // Initial zufällig Schneeflocken erzeugen
-    for(let i=0; i<maxInitialFlakes; i++){
-        setTimeout(createSnowflake, Math.random() * 5000);
+    const snowflakeCount = 50;
+    for(let i=0; i<snowflakeCount; i++){
+      const flake = document.createElement('div');
+      flake.className = 'snowflake';
+      flake.style.left = Math.random() * 100 + 'vw';
+      flake.style.fontSize = (Math.random()*10+10)+'px';
+      flake.style.opacity = Math.random();
+      flake.style.animationDuration = (Math.random()*10+5)+'s';
+      flake.innerHTML = '❄';
+      document.body.appendChild(flake);
     }
   </script>
 
   <!-- Script für Namen & Audio -->
-  <script sr
+  <script src="script.js"></script>
+
+</body>
+</html>
