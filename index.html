@@ -5,16 +5,124 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Frohe Weihnachten!</title>
 <link rel="stylesheet" href="style.css">
+<style>
+  /* Body & Hintergrund */
+  body {
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background: linear-gradient(to bottom, #8B0000, #000000, #C0C0C0);
+    color: white;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* Karte / Content */
+  .card {
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 30px;
+    border-radius: 15px;
+    background: rgba(0,0,0,0.4);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+
+  h2 {
+    margin: 0 0 15px;
+    font-size: 2em;
+  }
+
+  p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+  }
+
+  button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    background: crimson;
+    color: white;
+    font-size: 1.1em;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #ff4d4d;
+  }
+
+  audio {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  #error {
+    margin-top: 15px;
+    color: #ffb3b3;
+  }
+
+  /* Schneeflocken */
+  .snowflake {
+    position: fixed;
+    top: -10px;
+    color: white;
+    font-size: 1em;
+    user-select: none;
+    pointer-events: none;
+    z-index: 9999;
+    animation-name: fall;
+    animation-timing-function: linear;
+    animation-iteration-count: 1;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-10px) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(360deg); }
+  }
+</style>
 </head>
 <body>
+
   <div class="card">
     <h2>Frohe Weihnachten, <span id="name">Freund</span> 🎄</h2>
     <p>Ich habe eine kleine Nachricht für dich vorbereitet.</p>
     <button id="playBtn">▶️ Gruß abspielen</button>
     <audio id="player" controls></audio>
-    <div id="error" style="color:red;"></div>
+    <div id="error"></div>
   </div>
 
-  <script src="script.js"></script>
-</body>
-</html>
+  <!-- Schneeflocken-Skript -->
+  <script>
+    const maxInitialFlakes = 150; // zu Beginn erzeugt
+    const snowflakes = [];
+
+    function createSnowflake() {
+        const flake = document.createElement('div');
+        flake.className = 'snowflake';
+        flake.style.left = Math.random() * 100 + 'vw';
+        flake.style.fontSize = (Math.random() * 10 + 10) + 'px';
+        flake.style.opacity = Math.random();
+        const duration = Math.random() * 10 + 5; // 5-15s
+        flake.style.animationDuration = duration + 's';
+        flake.innerHTML = '❄';
+        document.body.appendChild(flake);
+        snowflakes.push(flake);
+
+        // Entfernt Schneeflocke nach Ende der Animation
+        setTimeout(() => {
+            flake.remove();
+            snowflakes.splice(snowflakes.indexOf(flake),1);
+            // Neue Schneeflocke nach zufälliger Verzögerung erzeugen
+            setTimeout(createSnowflake, Math.random() * 1000);
+        }, duration * 1000);
+    }
+
+    // Initial zufällig Schneeflocken erzeugen
+    for(let i=0; i<maxInitialFlakes; i++){
+        setTimeout(createSnowflake, Math.random() * 5000);
+    }
+  </script>
+
+  <!-- Script für Namen & Audio -->
+  <script sr
