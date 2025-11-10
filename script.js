@@ -5,7 +5,7 @@ const displayName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
 document.getElementById('name').textContent = displayName;
 
 // Audio Mapping (Dateiname = name.m4a im audio/ Ordner)
-const audioFile = `audio/${rawName}.m4a`;
+const audioFile = `audio/${rawName}_wg2025.m4a`;
 const player = document.getElementById('player');
 player.src = audioFile;
 
