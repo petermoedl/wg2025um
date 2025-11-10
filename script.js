@@ -9,7 +9,7 @@ const playBtn = document.getElementById('playBtn');
 const errorEl = document.getElementById('error');
 
 // Audio-Dateien mapping
-const audioFile = `audio/${rawName}.m4a`;
+const audioFile = `audio/${rawName}_wg2025.m4a`;
 const defaultAudio = `audio/default.m4a`;
 
 // Funktion prüfen ob Audio existiert (fetch)
